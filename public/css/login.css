@@ -1,0 +1,70 @@
+/********    login container    ********/
+.login-container {
+	z-index: 5;
+	position: absolute;
+	left: 0;
+	opacity: 1;
+	width: 100%;
+	height: 100%;
+	background-color: #efefef;
+	text-align: center;
+}
+
+.disappear {
+	display: none !important;
+	/*position: static;*/
+}
+
+.login-form {
+	position: absolute;
+	top: 30%;
+	left: 50%;
+	margin-left: -10rem;
+	padding: 10px 0;
+	width: 20rem;
+}
+
+#name {
+	padding: 10px;
+	font-size: 1rem;
+}
+
+.avatar-box {
+	margin-top: 1rem;
+	display: flex;
+	align-items: center;
+}
+
+.avatar-con {
+	width: 5rem;
+	height: 5rem;
+	margin-left: 10px;
+	border-radius: 5px;
+	background: url(../img/2.png);
+	background-repeat: no-repeat;
+	background-size: 100%;
+}
+
+#select-avatar {
+	width: 5rem;
+	height: 5rem;
+	font-size: 0;
+	opacity: 0;
+}
+
+#show-avatar img {
+	width: 5rem;
+	height: 5rem;
+}
+
+#login-submit {
+	display: block;
+	margin: 2rem auto;
+	width: 5rem;
+	height: 2.5rem;
+	color: #fff
+	letter-spacing: 3px;
+	border: none;
+	border-radius: 10px;
+	background-color: #f45460;
+}

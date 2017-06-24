@@ -1,0 +1,57 @@
+/********  users list  ********/
+.users-aside-container {
+	display: inline-block;
+	float: left;
+	width: 25%;
+	height: 100%;
+	background: #2e3238;
+	/*border-right: 5px solid #eee;*/
+}
+
+/*.users-aside-container {
+
+}*/
+
+.my-detail {
+	display: flex;
+	margin: 20px 1rem;
+	padding-bottom: 10px;
+	align-items: center;
+	/*width: 100%;*/
+	height: 4rem;
+	border-bottom: solid 1px #fff;
+}
+
+.my-avatar {
+	margin-right: .5rem;
+	width: 3rem;
+	height: 3rem;
+}
+
+.my-name {
+	font-size: 1.2rem;
+	color: #fff;
+}
+
+.users-list {
+	width: 100%;
+	overflow-y: scroll;
+	/*border-right: #2e3238;*/
+	/*padding: */
+}
+
+.users-room {
+	display: flex;
+	margin: 1rem;
+	background-color: #2e3641;
+	align-items: center;
+}
+
+/*#2e3641  #2e3641*/
+
+.main-container {
+	display: inline-block;
+	float: right;
+	width: 75%;
+	overflow: hidden;
+}

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>web socket</title>
+	<link rel="stylesheet" type="text/css" href="/css/socket.css">
+	<link rel="stylesheet" type="text/css" href="/css/login.css">
+	<link rel="stylesheet" type="text/css" href="/css/footer.css">
+	<link rel="stylesheet" type="text/css" href="/css/users-list.css">
+	<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+</head>
+<body>
+	<div class="login-container">
+		<div class="login-form">
+			<label for="name" class="input-nickname">请输入昵称:</label>
+			<input type="text" name="name" id="name">
+			<div class="avatar-box">
+				<label for="select-avatar" id="show-avatar">
+					请选择头像:
+				</label>
+				<div class="avatar-con"><input type="file" name="avatar" id="select-avatar"></div>
+			</div>
+			<button id="login-submit">提交</button>
+			<!-- <label for="password">请输入密码:</label> -->
+			<!-- <input type="password" name="password" id="password"> -->
+		</div>
+	</div>
+	<div class="chatting">
+		<div class="users-aside-container">
+			<div class="my-detail">
+				<!-- <img class="my-avatar" id="my-avatar" src="/img/0.png">
+				<span class="my-name" id="my-name"></span> -->
+			</div>
+			<!-- <ul class="users-list">
+				<li class="users-room">
+					<img class="my-avatar" id="my-avatar" src="/img/0.png">
+					<span class="my-name" id="my-name"></span>
+				</li>
+				<li class="users-room">
+					<img class="my-avatar" id="my-avatar" src="/img/0.png">
+					<span class="my-name" id="my-name"></span>
+				</li>
+				<li class="users-room">
+					<img class="my-avatar" id="my-avatar" src="/img/0.png">
+					<span class="my-name" id="my-name"></span>
+				</li>
+				<li class="users-room">
+					<img class="my-avatar" id="my-avatar" src="/img/0.png">
+					<span class="my-name" id="my-name"></span>
+				</li>
+				<li class="users-room">
+					<img class="my-avatar" id="my-avatar" src="/img/0.png">
+					<span class="my-name" id="my-name"></span>
+				</li>
+				<li class="users-room">
+					<img class="my-avatar" id="my-avatar" src="/img/0.png">
+					<span class="my-name" id="my-name"></span>
+				</li>
+				<li class="users-room">
+					<img class="my-avatar" id="my-avatar" src="/img/0.png">
+					<span class="my-name" id="my-name"></span>
+				</li>
+				<li class="users-room">
+					<img class="my-avatar" id="my-avatar" src="/img/0.png">
+					<span class="my-name" id="my-name"></span>
+				</li>
+				<li class="users-room">
+					<img class="my-avatar" id="my-avatar" src="/img/0.png">
+					<span class="my-name" id="my-name"></span>
+				</li>
+				<li class="users-room">
+					<img class="my-avatar" id="my-avatar" src="/img/0.png">
+					<span class="my-name" id="my-name"></span>
+				</li>
+				<li class="users-room">
+					<img class="my-avatar" id="my-avatar" src="/img/0.png">
+					<span class="my-name" id="my-name"></span>
+				</li>
+				<li class="users-room">
+					<img class="my-avatar" id="my-avatar" src="/img/0.png">
+					<span class="my-name" id="my-name"></span>
+				</li>
+			</ul> -->
+		</div>
+		<div class="main-container">
+			<header id="chatting-title" class="chatting-title">
+				<span id="chatting-name">Group Chat</span>
+			</header>
+			<div class="chatting-container" id="chatting-container">
+				<!-- <div class="the-other-side chatting-box">
+					<img class="user-avatar" src="/img/0.png">
+					<div class="chatting-detail-container">
+						<div class="chat-aside-container">
+							<div class="chatting-nickname">辣脖子</div>
+							<div class="chatting-box-con">
+								<div class="chatting-right-triangle"></div>
+								<div class="chat-words-con">
+									死胖子
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="one-side chatting-box">
+					<img class="user-avatar" src="/img/0.png">
+					<div class="chatting-aside-container">
+						<div class="chat-aside-container">
+							<div class="chatting-nickname">辣脖子</div>
+							<div class="chatting-box-con">
+								<div class="chat-words-con">
+									死胖子
+								</div>
+								<div class="chatting-left-triangle"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<p class="system-alert">系统通知</p> -->
+			</div>
+			<footer class="input-container">
+				<div class="function-box-container">
+					<label for="get-img" id="for-get-img">
+						<input type="file" name="file" id="get-img">
+					</label>
+					<label for="delever-file" id="for-deliver-file">
+						<input type="file" name="file" id="deliver-file">
+					</label>
+				</div>
+				<div class="input-area-con">
+					<textarea class="input-area" id="input-area" autocomplete="off" type="text"></textarea>
+				</div>
+				<div class="input-bottom-line">
+					<button class="input-send" id="input-send">发送</button>
+				</div>
+			</footer>
+		</div>
+	</div>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+	<script type="text/javascript" src="/js/login.js"></script>
+	<script src="/js/socket.js"></script>
+</body>
+</html>

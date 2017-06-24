@@ -1,0 +1,82 @@
+/********        input-box        ********/
+.input-container {
+	width: 100%;
+	font-size: 0px;
+}
+
+.function-box-container {
+	width: 100%;
+	height: 1.5rem;
+	padding: .5rem 0;
+	background: #eee;
+}
+
+.function-box-container label {
+	display: inline-block;
+	width: 1.5rem;
+	height: 1.5rem;
+	margin: 0 10px;
+	background-repeat: no-repeat;
+	background-size: 100%;
+	cursor: pointer;
+}
+
+.function-box-container label input {
+	opacity: 0;
+	font-size: 0;
+	width: 0;
+	height: 0;
+	cursor: pointer;
+}
+
+#for-get-img {
+	background-image: url(/../img/1.png);
+}
+
+#for-deliver-file {
+	background-image: url(/../img/2.png);
+}
+
+.input-area {
+	width: 100%;
+	padding: .4rem;
+	height: 4rem;
+	resize: none;
+	font-size: 1rem;
+	word-break: break-all;
+	border: 0;
+	outline: 0;
+}
+
+.input-bottom-line {
+	width: 100%;
+	height: 2.4rem;
+	background-color: #eee;
+}
+
+.input-send {
+	float: right;
+	margin-right: 10px;
+	margin-top: .3rem;
+	width: 6rem;
+	height: 1.8rem;
+	font-size: 1rem;
+	background: #eee;
+	color: #bbb;
+	letter-spacing: 5px;
+	text-align: center;
+	outline: none;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.input-send:hover {
+	background: #bfecec;
+	color: #fff;
+}
+
+.input-send:click {
+	background: #bfecec;
+	color: #fff;
+}
