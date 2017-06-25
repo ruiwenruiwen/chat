@@ -1,20 +1,9 @@
-var socket = io();
 var submit = document.getElementById('input-send');
 var input = document.getElementById('input-area');
 var chatCon = document.getElementById('chatting-container');
 var title = document.getElementById('chatting-name');
 var OriTitle = title.innerHTML;
 var nickname = '';
-
-var chat = function() {
-	this.socket = null;
-}
-
-chat.prototype = {
-	init: function() {
-		this.socket = io.connect();
-	}
-}
 
 $('.chatting-container').css("height", $(window).height() - $('.chatting-title').height() - $('.input-container').height()) ;
 console.log($(window).height() , $('.chatting-title').height() , $('.input-container').height());
@@ -25,9 +14,11 @@ function System(msg){
 	let content = chatCon.innerHTML;
 	content += `<p class="system-alert">${msg}</p>`;
 	chatCon.innerHTML = content;
+	chatCon.scrollTop = chatCon.scrollHeight;
 }
 
 function SubmitCtrl(){
+	console.log("click submit");
 	var data = input.value.trim();
 	if(data !== ''){
 		socket.emit('chat message', {
@@ -53,7 +44,6 @@ window.onkeydown = function(event){
 function AppendChat(msgAvatar, msgName, msgContent){
 	let HTML = chatCon.innerHTML;
 	let whitchSide;
-	// console.log(msg);
 	if(msgName == nickname){
 		HTML += `
 		<div class="one-side chatting-box">
@@ -93,15 +83,15 @@ function AppendChat(msgAvatar, msgName, msgContent){
 
 //  接收 socket 发送回的信息，并在聊天页面中显示出来
 socket.on('chat message', function(msg){
+	console.log("click submit");
+	console.log(msg);
 	AppendChat(msg.avatar, msg.name, msg.words);
 });
 
-
-
 // when number changes, alert
-socket.on('system', function(userData, userCount, type) {
+this.socket.on('system', function(nickname, userCount, type) {
 	title.innerHTML = `${OriTitle} (${userCount})`;
-	let msg = userData.nickname + (type == 'login' ? '加入群聊' : '离开群聊');
+	let msg = nickname + (type == 'login' ? '加入群聊' : '离开群聊');
 	System(msg);
 })
 
@@ -110,11 +100,11 @@ var img = document.getElementById('get-img');
 img.addEventListener('change', function(){
 	console.log("click");
 	var file = img.files[0];
-	let reg =  /^(\s|\S)+(jpg|png|JPG|PNG)+$/;
-	if(!reg.test(file.type)){
-		System('请选择扩展名为png或jpg格式的图片！');
-		return false;
-	}
+	let reg =  /image\/\w+/;
+		if(!reg.test(file.type)){
+			alert('请确保上传的头像文件为图像类型！');
+			return;
+		}
 	//获取文件并用FileReader进行读取
 	var reader = new FileReader();
 	if (!reader) {
@@ -140,11 +130,44 @@ socket.on('chat img', function(msg) {
 	AppendChat(msg.avatar, msg.nickname, msg.img);
 })
 
+var file = document.getElementById('deliver-file');
+
+// 传文件操作
+file.addEventListener('change', function(){
+	console.log("click");
+	var doc = file.files[0];
+	//获取文件并用FileReader进行读取
+	var reader = new FileReader();
+	if (!reader) {
+		System('你的浏览器不支持此功能，请更换高版本的浏览器');
+		this.value = '';
+		return;
+	};
+	reader.onload = function(e) {
+		//读取成功，显示到页面并发送到服务器
+		this.value = '';
+		socket.emit('chat file', {
+			file: e.target.result,
+			avatar: avatar,
+			nickname: nickname
+		});
+	};
+	//将文件以Data URL形式读入页面
+	reader.readAsDataURL(doc);
+})
+
+//  对服务器发送过来的 chat file 操作
+socket.on('chat file', function(msg) {
+	AppendChat(msg.avatar, msg.nickname, msg.file);
+})
+
 socket.on('loginSuccess', function(userData) {
 	nickname = userData.nickname;
 	avatar = userData.avatar;
 	document.getElementsByClassName('my-detail')[0].innerHTML = `<img class="my-avatar" id="my-avatar" src="${avatar}">
 		<span class="my-name" id="my-name">${nickname}</span>`
 	console.log(userData);
+	console.log(`../${avatar}`);
 	$('.login-container').addClass('disappear');
  });
+

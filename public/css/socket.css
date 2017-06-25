@@ -68,7 +68,7 @@ body {
 .chatting-nickname {
 	font-size: .8rem;
 	color: #bbb;
-	max-width: 15rem;
+	max-width: 20rem;
 }
 
 .chatting-box-con {
@@ -90,7 +90,7 @@ body {
 .chat-words-con {
 	display: inline-block;
 	display: inline-flex !important;
-	max-width: 15rem;
+	max-width: 20rem;
 	min-height: 2rem;
 	padding: 5px;
 	font-size: 1rem;
@@ -103,7 +103,20 @@ body {
 }
 
 .chat-words-con img {
-	max-width: 15rem;
+	max-width: 20rem;
+}
+
+.chat-words-con a {
+	display: inline-flex;
+	align-items: center;
+	color: #888;
+	font-size: 1rem;
+	text-decoration: none;
+}
+
+.chat-words-con a img {
+	width: 4rem;
+	margin-right: 5px;
 }
 
 .one-side {
