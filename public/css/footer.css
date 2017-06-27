@@ -9,6 +9,7 @@
 	height: 1.5rem;
 	padding: .5rem 0;
 	background: #eee;
+	border-top: solid 1.5px #e4e4e4;
 }
 
 .function-box-container label {
@@ -62,6 +63,7 @@
 	word-break: break-all;
 	border: 0;
 	outline: 0;
+	background-color: #eee;
 }
 
 .input-bottom-line {

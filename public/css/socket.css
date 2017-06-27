@@ -11,7 +11,8 @@ body {
 	width: 100%;
 	height: 100%;
 	min-width: 1000px;
-	overflow-x: scroll;
+	overflow-x: auto;
+	overflow-y: auto;
 	/*overflow: hidden;*/
 }
 
@@ -21,29 +22,84 @@ body {
 	width: 80%;
 	min-width: 1000px;
 	height: 100%;
-	border-right: 5px solid #eee;
+	/*border-right: 5px solid #eee;*/
 	/*background-color: #eee;*/
 }
 
 /********  chat main container  ********/
-.chatting-title {
-	width: 100%;
-	height: 3rem;
-	font-size: 1.3rem;
-	line-height: 3rem;
-	letter-spacing: 2px;
+.main-container {
+	position: relative;
 	background-color: #eee;
-	/*border-bottom: solid #efefef 1px;*/
+	height: 100%;
+}
+
+.chatting-title {
+	/*width: 100%;*/
+	height: 3rem;
+	margin: 0 1rem;
+	font-size: 1rem;
+	text-align: center;
+	line-height: 3rem;
+	/*letter-spacing: 2px;*/
+	background-color: #eee;
+	border-bottom: solid #e4e4e4 1.5px;
 }
 
 #chatting-name {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.title-label {
 	margin-left: 10px;
+	width: 1rem;
+	height: 1rem;
+	cursor: pointer;
+}
+
+.users-line {
+	display: none;
+	position: absolute;
+	max-height: 100px;
+	width: 100%;
+	overflow-y: auto;
+	border-bottom: solid 2px #e4e4e4;
+	text-align: center;
+	background-color: #eee;
+	z-index: 2;
+}
+
+.users-detail {
+	margin: 1rem;
+	display: inline-block;
+	text-align: center;
+}
+
+.line-avatar {
+	width: 2rem;
+	height: 2rem;
+}
+
+.line-user-name {
+	margin: 0 auto;
+	font-size: .8rem;
+	max-width: 5rem;
+	word-break: break-all;
+}
+
+.whether-choose {
+	position: absolute;
+	top: 3rem;
+	width: 100%;
+	background-color: #eee;
+	z-index: 1;
 }
 
 .chatting-container {
 	width: 100%;
 	height: auto;
-	overflow-y: scroll;
+	overflow-y: auto;
 }
 
 .chatting-box {
@@ -72,6 +128,7 @@ body {
 }
 
 .chatting-box-con {
+	position: relative;
 	font-size: 0;
 }
 
@@ -81,6 +138,8 @@ body {
 }
 
 .chatting-right-triangle {
+	position: absolute;
+	top: 10px;
 	display: inline-block;
 	border-top: 8px solid transparent;
 	border-right: 8px solid #fff;
@@ -128,6 +187,18 @@ body {
 	margin-right: 10px;
 }
 
+.the-other-side .chat-words-con{
+	margin-left: 8px;
+}
+
+.one-side .chatting-box-con{
+	position: relative;
+}
+
+.one-side .chat-words-con{
+	margin-right: 8px;
+}
+
 .the-other-side .user-avatar {
 	margin-left: 10px;
 	margin-right: 5px;
@@ -138,6 +209,9 @@ body {
 }
 
 .one-side .chatting-left-triangle {
+	position: absolute;
+	top: 25px;
+	right: 0px;
 	border-top: 8px solid transparent;
 	border-left: 8px solid rgb(244,255,255);
 	border-bottom: 8px solid transparent;
@@ -154,14 +228,19 @@ body {
 .system-alert {
 	margin: 1rem auto;
 	padding: 0 auto;
-	width: 40%;
+	/*width: 40%;*/
 	height: 1.6rem;
 	line-height: 1.6rem;
-	background-color: #bbb;
-	color: #fff;
+	/*background-color: #bbb;*/
+	color: #888;
 	letter-spacing: 2px;
 	font-size: 0.8rem;
 	text-align: center;
-	border-radius: 0.8rem;
-	box-shadow: 1px 1px 1px #888;
+	/*border-radius: 0.8rem;*/
+	/*box-shadow: 1px 1px 1px #888;*/
+}
+
+.disappear {
+	z-index: -1;
+	display: none;
 }

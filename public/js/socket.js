@@ -2,29 +2,62 @@ var submit = document.getElementById('input-send');
 var input = document.getElementById('input-area');
 var chatCon = document.getElementById('chatting-container');
 var title = document.getElementById('chatting-name');
+var rooms = document.getElementsByClassName('users-room');
+var usersList = document.getElementById('users-list');
 var OriTitle = title.innerHTML;
 var nickname = '';
+var indexRoom = '';
 
-$('.chatting-container').css("height", $(window).height() - $('.chatting-title').height() - $('.input-container').height()) ;
-console.log($(window).height() , $('.chatting-title').height() , $('.input-container').height());
+$('.chatting-container').css("height", $(window).height() - $('.chatting-title').height() - $('.input-container').height() - 2);
+$('.whether-choose').css("height", $(window).height() - $('.chatting-title').height());
 $('.users-list').css("height", $(window).height() - $('.my-detail').height() - 60).css("max-height", $(window).height() - $('.my-detail').height() - 60);
+
+function ChooseChat(e){
+	if(e.target.innerHTML.length > 200) return ;
+	let tar = e.target.innerHTML.length < 20 ? e.target.parentNode.innerHTML : e.target.innerHTML;
+	tar = tar.split('<span class="your-name">')[1].split('</span>')[0];
+	console.log(tar);
+	$('.whether-choose').removeClass('disappear');
+	for(i = 0; i < rooms.length; i++){
+		let check = rooms[i].innerHTML.split('<span class="your-name">')[1].split('</span>')[0];
+		if(tar === check){
+			rooms[i].style.backgroundColor = '#3a3f45';
+			indexRoom = tar;
+			socket.emit('enter', {
+				room: tar,
+				userData: {
+					nickname: nickname,
+					avatar: avatar
+				}
+			})
+		} else {
+			rooms[i].style.backgroundColor = '#2e3641';
+		}
+	}
+	$('.whether-choose').addClass('disappear');
+}
+
+usersList.addEventListener('click', ChooseChat);
 
 // 系统提醒的封装函数
 function System(msg){
 	let content = chatCon.innerHTML;
-	content += `<p class="system-alert">${msg}</p>`;
+	content += `<p class="system-alert">--------${msg}--------</p>`;
 	chatCon.innerHTML = content;
 	chatCon.scrollTop = chatCon.scrollHeight;
 }
 
 function SubmitCtrl(){
 	console.log("click submit");
-	var data = input.value.trim();
-	if(data !== ''){
+	var words = input.value.trim();
+	if(words !== ''){
 		socket.emit('chat message', {
-			avatar: avatar,
-			name: nickname,
-			words: data
+			room: indexRoom,
+			userData: {
+					nickname: nickname,
+					avatar: avatar
+				},
+			content: words
 		});
 	}
 	input.value = '';
@@ -82,18 +115,41 @@ function AppendChat(msgAvatar, msgName, msgContent){
 }
 
 //  接收 socket 发送回的信息，并在聊天页面中显示出来
-socket.on('chat message', function(msg){
-	console.log("click submit");
+this.socket.on('chat message', function(msg){
+	console.log("click socket");
 	console.log(msg);
-	AppendChat(msg.avatar, msg.name, msg.words);
+	AppendChat(msg.userData.avatar, msg.userData.nickname, msg.content);
 });
 
+usersLine = document.getElementsByClassName('users-line')[0];
+
+function AppendUsers(avatar, nickname){
+	content = `
+		<div class="users-detail">
+			<img class="line-avatar" src="${avatar}">
+			<div class="line-user-name">${nickname}</div>
+		</div>`;
+	usersLine.innerHTML += content;
+}
+
 // when number changes, alert
-this.socket.on('system', function(nickname, userCount, type) {
-	title.innerHTML = `${OriTitle} (${userCount})`;
-	let msg = nickname + (type == 'login' ? '加入群聊' : '离开群聊');
+this.socket.on('system', function(room, nickname, users, type) {
+	let len = users.length, i;
+	title.innerHTML = `${room}(${len})<img class="title-label" src="/img/more_unfold.png">`;
+	let msg = nickname + (type == 'login' ? '加入聊天' : '已离开');
+	usersLine.innerHTML = '';
+	for(i = 0; i < len; i++){
+		console.log(users[i]);
+		AppendUsers(users[i].avatar, users[i].nickname);
+	}
 	System(msg);
 })
+
+//监听 toggle 事件
+$('#chatting-name').on('click', 'img', () => {
+	console.log('click3333');
+	$(".users-line").slideToggle("slow");
+});
 
 //  listen img btn
 var img = document.getElementById('get-img');
@@ -116,9 +172,12 @@ img.addEventListener('change', function(){
 		//读取成功，显示到页面并发送到服务器
 		this.value = '';
 		socket.emit('chat img', {
+			room: indexRoom,
+			userData: {
+					nickname: nickname,
+					avatar: avatar
+				},
 			img: e.target.result,
-			avatar: avatar,
-			nickname: nickname
 		});
 	};
 	//将文件以Data URL形式读入页面
@@ -127,12 +186,12 @@ img.addEventListener('change', function(){
 
 //  对服务器发送过来的 chat img 操作
 socket.on('chat img', function(msg) {
-	AppendChat(msg.avatar, msg.nickname, msg.img);
+	AppendChat(msg.userData.avatar, msg.userData.nickname, msg.content);
 })
 
+// 传文件操作
 var file = document.getElementById('deliver-file');
 
-// 传文件操作
 file.addEventListener('change', function(){
 	console.log("click");
 	var doc = file.files[0];
@@ -147,9 +206,12 @@ file.addEventListener('change', function(){
 		//读取成功，显示到页面并发送到服务器
 		this.value = '';
 		socket.emit('chat file', {
+			room: indexRoom,
+			userData: {
+					nickname: nickname,
+					avatar: avatar
+				},
 			file: e.target.result,
-			avatar: avatar,
-			nickname: nickname
 		});
 	};
 	//将文件以Data URL形式读入页面
@@ -158,7 +220,7 @@ file.addEventListener('change', function(){
 
 //  对服务器发送过来的 chat file 操作
 socket.on('chat file', function(msg) {
-	AppendChat(msg.avatar, msg.nickname, msg.file);
+	AppendChat(msg.userData.avatar, msg.userData.nickname, msg.content);
 })
 
 socket.on('loginSuccess', function(userData) {
@@ -171,3 +233,12 @@ socket.on('loginSuccess', function(userData) {
 	$('.login-container').addClass('disappear');
  });
 
+socket.on('clean board', (data) => {
+	chatCon.innerHTML = '';
+	let len = data.length;
+	console.log(data);
+	for(i = 0; i < len; i++){
+		console.log(data[i]);
+		AppendChat(data[i].userData.avatar, data[i].userData.nickname, data[i].content);
+	}
+})

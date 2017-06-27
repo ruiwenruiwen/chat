@@ -5,7 +5,6 @@
 	width: 25%;
 	height: 100%;
 	background: #2e3238;
-	/*border-right: 5px solid #eee;*/
 }
 
 /*.users-aside-container {
@@ -17,27 +16,41 @@
 	margin: 20px 1rem;
 	padding-bottom: 10px;
 	align-items: center;
-	/*width: 100%;*/
 	height: 4rem;
 	border-bottom: solid 1px #fff;
 }
 
+.users-room {
+	cursor: pointer;
+}
+
 .my-avatar {
 	margin-right: .5rem;
-	width: 3rem;
-	height: 3rem;
+	width: 3.2rem;
+	height: 3.2rem;
 }
 
 .my-name {
-	font-size: 1.2rem;
+	font-size: 1.5rem;
 	color: #fff;
 }
 
+.your-avatar {
+	margin-right: .5rem;
+	width: 2.8rem;
+	height: 2.8rem;
+}
+
+.your-name {
+	font-size: 1rem;
+	color: #fff;
+}
+
+/*#3a3f45*/
+
 .users-list {
 	width: 100%;
-	overflow-y: scroll;
-	/*border-right: #2e3238;*/
-	/*padding: */
+	overflow-y: auto;
 }
 
 .users-room {
@@ -47,7 +60,6 @@
 	align-items: center;
 }
 
-/*#2e3641  #2e3641*/
 
 .main-container {
 	display: inline-block;

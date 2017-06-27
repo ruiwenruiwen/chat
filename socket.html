@@ -31,61 +31,35 @@
 				<!-- <img class="my-avatar" id="my-avatar" src="/img/0.png">
 				<span class="my-name" id="my-name"></span> -->
 			</div>
-			<!-- <ul class="users-list">
+			<ul class="users-list" id="users-list">
 				<li class="users-room">
-					<img class="my-avatar" id="my-avatar" src="/img/0.png">
-					<span class="my-name" id="my-name"></span>
+					<img class="your-avatar" src="/img/9.png">
+					<span class="your-name">Group Chat</span>
 				</li>
 				<li class="users-room">
-					<img class="my-avatar" id="my-avatar" src="/img/0.png">
-					<span class="my-name" id="my-name"></span>
+					<img class="your-avatar" src="/img/9.png">
+					<span class="your-name">My Partner</span>
 				</li>
 				<li class="users-room">
-					<img class="my-avatar" id="my-avatar" src="/img/0.png">
-					<span class="my-name" id="my-name"></span>
+					<img class="your-avatar" src="/img/9.png">
+					<span class="your-name">Hello!</span>
 				</li>
 				<li class="users-room">
-					<img class="my-avatar" id="my-avatar" src="/img/0.png">
-					<span class="my-name" id="my-name"></span>
+					<img class="your-avatar" src="/img/9.png">
+					<span class="your-name">Play Together!</span>
 				</li>
-				<li class="users-room">
-					<img class="my-avatar" id="my-avatar" src="/img/0.png">
-					<span class="my-name" id="my-name"></span>
-				</li>
-				<li class="users-room">
-					<img class="my-avatar" id="my-avatar" src="/img/0.png">
-					<span class="my-name" id="my-name"></span>
-				</li>
-				<li class="users-room">
-					<img class="my-avatar" id="my-avatar" src="/img/0.png">
-					<span class="my-name" id="my-name"></span>
-				</li>
-				<li class="users-room">
-					<img class="my-avatar" id="my-avatar" src="/img/0.png">
-					<span class="my-name" id="my-name"></span>
-				</li>
-				<li class="users-room">
-					<img class="my-avatar" id="my-avatar" src="/img/0.png">
-					<span class="my-name" id="my-name"></span>
-				</li>
-				<li class="users-room">
-					<img class="my-avatar" id="my-avatar" src="/img/0.png">
-					<span class="my-name" id="my-name"></span>
-				</li>
-				<li class="users-room">
-					<img class="my-avatar" id="my-avatar" src="/img/0.png">
-					<span class="my-name" id="my-name"></span>
-				</li>
-				<li class="users-room">
-					<img class="my-avatar" id="my-avatar" src="/img/0.png">
-					<span class="my-name" id="my-name"></span>
-				</li>
-			</ul> -->
+			</ul>
 		</div>
 		<div class="main-container">
 			<header id="chatting-title" class="chatting-title">
-				<span id="chatting-name">Group Chat</span>
+				<div id="chatting-name">未选择聊天</div>
 			</header>
+			<div class="users-line">
+<!-- 				<div class="users-detail">
+					<img class="line-avatar" src="/img/0.png">
+					<div class="line-user-name">555</div>
+				</div> -->
+			</div>
 			<div class="chatting-container" id="chatting-container">
 				<!-- <div class="the-other-side chatting-box">
 					<img class="user-avatar" src="/img/0.png">
@@ -133,6 +107,8 @@
 					<button class="input-send" id="input-send">发送</button>
 				</div>
 			</footer>
+			<div class="whether-choose">
+			</div>
 		</div>
 	</div>
 	<script src="/socket.io/socket.io.js"></script>
@@ -140,5 +116,6 @@
 	<script src="/js/uuid.js"></script>
 	<script type="text/javascript" src="/js/login.js"></script>
 	<script src="/js/socket.js"></script>
+	<!-- <script type="text/javascript" src="/js/toggle.js"></script> -->
 </body>
 </html>
