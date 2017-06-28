@@ -12,6 +12,7 @@ $('.chatting-container').css("height", $(window).height() - $('.chatting-title')
 $('.whether-choose').css("height", $(window).height() - $('.chatting-title').height());
 $('.users-list').css("height", $(window).height() - $('.my-detail').height() - 60).css("max-height", $(window).height() - $('.my-detail').height() - 60);
 
+// 选择聊天室操作
 function ChooseChat(e){
 	if(e.target.innerHTML.length > 200) return ;
 	let tar = e.target.innerHTML.length < 20 ? e.target.parentNode.innerHTML : e.target.innerHTML;
@@ -39,6 +40,23 @@ function ChooseChat(e){
 
 usersList.addEventListener('click', ChooseChat);
 
+// 私聊操作
+function PersonalChat(e){
+	if(e.target.innerHTML.length > 200) return ;
+	let tar = e.target.innerHTML.length < 20 ? e.target.parentNode.innerHTML : e.target.innerHTML;
+	console.log(tar);
+	tar = tar.split('<p class="line-user-name">')[1].split('</p>')[0];
+	console.log(tar);
+	if(tar === nickname){
+		System('悄悄话对象不能为自己');
+		return ;
+	}
+	input.value = `悄悄话模式：${tar}(删除此行字退出悄悄话):`;
+	$('#personal-chat').css('opacity', 1);
+}
+
+document.getElementById('users-line').addEventListener('click', PersonalChat);
+
 // 系统提醒的封装函数
 function System(msg){
 	let content = chatCon.innerHTML;
@@ -47,9 +65,37 @@ function System(msg){
 	chatCon.scrollTop = chatCon.scrollHeight;
 }
 
+$('#personal-chat').on('click', () => {
+	let toWhom = input.value.split('悄悄话模式：')[1].split('(删除此行字退出悄悄话):')[0];
+	console.log(toWhom);
+	let words = input.value.split('悄悄话模式：')[1].split('(删除此行字退出悄悄话):')[1];
+	console.log(words);
+	if(words.trim() === '') {
+		System('输入内容不能为空');
+	}
+	if(words.trim() !== ''){
+		socket.emit('personol chat', {
+			room: indexRoom,
+			to: toWhom,
+			userData: {
+					nickname: nickname,
+					avatar: avatar
+				},
+			content: words
+		});
+	}
+	input.value = '';
+	$('#personal-chat').css('opacity', 0);
+})
+
 function SubmitCtrl(){
 	console.log("click submit");
-	var words = input.value.trim();
+	let words = input.value.trim();
+	if(words.indexOf("悄悄话模式：") === 0 && words.indexOf("(删除此行字退出悄悄话):") > -1){
+		System('悄悄话请点击悄悄话按钮发送');
+		input.value = '';
+		return ;
+	}
 	if(words !== ''){
 		socket.emit('chat message', {
 			room: indexRoom,
@@ -127,7 +173,7 @@ function AppendUsers(avatar, nickname){
 	content = `
 		<div class="users-detail">
 			<img class="line-avatar" src="${avatar}">
-			<div class="line-user-name">${nickname}</div>
+			<p class="line-user-name">${nickname}</p>
 		</div>`;
 	usersLine.innerHTML += content;
 }
@@ -158,7 +204,7 @@ img.addEventListener('change', function(){
 	var file = img.files[0];
 	let reg =  /image\/\w+/;
 		if(!reg.test(file.type)){
-			alert('请确保上传的头像文件为图像类型！');
+			System('请确保上传的头像文件为图像类型！');
 			return;
 		}
 	//获取文件并用FileReader进行读取

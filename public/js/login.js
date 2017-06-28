@@ -21,6 +21,7 @@ selectAvatar.addEventListener('change', function(){
 		//将文件以Data URL形式读入页面
 		reader.readAsDataURL(file);
 		reader.onload = e => {
+			$('.avatar-con').css('background-image','url(../img/uploadSucc.png)');
 			this.value = '';
 			avatar = e.target.result;
 		};
@@ -41,6 +42,7 @@ $('#login-submit').click(function(){
 			alert("输入昵称需要在2到20个字符里面");
 			return false;
 		}
+		// 信息无误，弹射信息到服务端，完成上传图片，注册
 		socket.emit('login',{
 			nickname: nickname,
 			avatar: avatar

@@ -54,10 +54,11 @@
 			<header id="chatting-title" class="chatting-title">
 				<div id="chatting-name">未选择聊天</div>
 			</header>
-			<div class="users-line">
-<!-- 				<div class="users-detail">
+			<div class="users-line" id="users-line">
+				<!-- <div class="users-detail">
 					<img class="line-avatar" src="/img/0.png">
-					<div class="line-user-name">555</div>
+					<p class="line-user-name">555</
+					p>
 				</div> -->
 			</div>
 			<div class="chatting-container" id="chatting-container">
@@ -105,6 +106,7 @@
 				</div>
 				<div class="input-bottom-line">
 					<button class="input-send" id="input-send">发送</button>
+					<button class="input-send personal-chat" id="personal-chat">悄悄话</button>
 				</div>
 			</footer>
 			<div class="whether-choose">
@@ -113,9 +115,7 @@
 	</div>
 	<script src="/socket.io/socket.io.js"></script>
 	<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-	<script src="/js/uuid.js"></script>
 	<script type="text/javascript" src="/js/login.js"></script>
 	<script src="/js/socket.js"></script>
-	<!-- <script type="text/javascript" src="/js/toggle.js"></script> -->
 </body>
 </html>
